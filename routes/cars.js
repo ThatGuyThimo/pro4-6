@@ -1,5 +1,5 @@
 import express from 'express';
-import { postCars, getAllCars, getAllBrands, getOneCar } from '../functions/cars.js';
+import { addCar, getAllCars, getAllBrands, getOneCar } from '../functions/cars.js';
 const router = express.Router()
 
 router.use((req, res, next) => {
@@ -29,6 +29,10 @@ router.get('/getOneCar', (req, res) => {
 
 router.get('/getAllBrands', (req, res) => {
   getAllBrands(req, res)
+})
+
+router.post('/addCar', (req, res) => {
+  addCar(req, res)
 })
 
 export { router }

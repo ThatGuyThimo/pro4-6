@@ -1,14 +1,18 @@
-import { dbCarPost, dbGetCars, dbGetBrands, dbGetOneCar } from "../components/dbFunctions.js";
+import { dbPostCar, dbGetCars, dbGetBrands, dbGetOneCar } from "../components/dbFunctions.js";
+import { logError } from "./errorLogging.js"
 
 
-async function postCars(req, res) {
-    try {
-        const data = dbPost()
-        return data
-    } catch(e) {
-        console.error(e)
-        res.status(500)
-        res.json({ error: 'Internal Server Error' });
+async function addCar(req, res) {
+    if(checkParams(req, res)){
+        try {
+            // const data = dbPostCar(req)
+            await logError("addCar")
+            return "kaas"
+        } catch(e) {
+            console.log("addCar ", await logError(e))
+            res.status(500)
+            res.json({ error: 'Internal Server Error' });
+        }
     }
 }
 
@@ -17,7 +21,7 @@ async function getAllCars(req, res) {
         const data = await dbGetCars()
         res.json(data)
     } catch(e) {
-        console.error(e)
+        await logError(e)
         res.status(500)
         res.json({ error: 'Internal Server Error' });
     }
@@ -57,4 +61,4 @@ async function checkParams(req, res) {
     }
 };
 
-export {postCars, getAllCars, getAllBrands, getOneCar}
+export {addCar, getAllCars, getAllBrands, getOneCar}

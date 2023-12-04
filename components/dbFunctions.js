@@ -1,6 +1,6 @@
 import { Car, Brand } from './database.js'
 
-async function dbCarPost(params) {
+async function dbPostCar(params) {
     const query = Car.save
 }
 
@@ -19,4 +19,4 @@ async function dbGetBrands(params) {
     return query
 }
 
-export {dbCarPost, dbGetCars, dbGetBrands, dbGetOneCar}
+export {dbPostCar, dbGetCars, dbGetBrands, dbGetOneCar}
