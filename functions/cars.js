@@ -5,11 +5,10 @@ import { logError } from "./errorLogging.js"
 async function addCar(req, res) {
     if(checkParams(req, res)){
         try {
-            // const data = dbPostCar(req)
-            await logError("addCar")
-            return "kaas"
+            const data = dbPostCar(req)
+            return data
         } catch(e) {
-            console.log("addCar ", await logError(e))
+            console.log("addCar ", await logError("addCar", e))
             res.status(500)
             res.json({ error: 'Internal Server Error' });
         }
@@ -21,7 +20,7 @@ async function getAllCars(req, res) {
         const data = await dbGetCars()
         res.json(data)
     } catch(e) {
-        await logError(e)
+        console.log("getAllCars ", await logError("getAllCars", e))
         res.status(500)
         res.json({ error: 'Internal Server Error' });
     }
@@ -33,7 +32,7 @@ async function getOneCar(req, res) {
             const data = await dbGetOneCar(req.query)
             res.json(data)
         } catch(e) {
-            console.error(e)
+            console.log("getOneCar ", await logError("getOneCar", e))
             res.status(500)
             res.json({ error: 'Internal Server Error' });
         }
@@ -45,7 +44,7 @@ async function getAllBrands(req, res) {
         const data = await dbGetBrands()
         res.json(data)
     } catch(e) {
-        console.error(e)
+        console.log("getAllBrands ", await logError("getAllBrands", e))
         res.status(500)
         res.json({ error: 'Internal Server Error' });
     }
