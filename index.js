@@ -7,7 +7,7 @@ import {router as userRouter} from './routes/usersRoute.js'
 
 const app = express()
 const httpPort = process.env.HTTPPORT
-const httpPort = process.env.HTTPSPORT
+const httpsPort = process.env.HTTPSPORT
 
 const options = {
   key: fs.readFileSync("./data/certs/thimodehaankey.pem"),
