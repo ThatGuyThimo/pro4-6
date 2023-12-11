@@ -9,8 +9,7 @@ async function addCar(req, res) {
             return data
         } catch(e) {
             console.log("addCar ", await logError("addCar", e))
-            res.status(500)
-            res.json({ error: 'Internal Server Error' });
+            res.status(500).json({ error: 'Internal Server Error' });
         }
     }
 }
@@ -21,8 +20,7 @@ async function getAllCars(req, res) {
         res.json(data)
     } catch(e) {
         console.log("getAllCars ", await logError("getAllCars", e))
-        res.status(500)
-        res.json({ error: 'Internal Server Error' });
+        res.status(500).json({ error: 'Internal Server Error' });
     }
 };
 
@@ -33,8 +31,7 @@ async function getOneCar(req, res) {
             res.json(data)
         } catch(e) {
             console.log("getOneCar ", await logError("getOneCar", e))
-            res.status(500)
-            res.json({ error: 'Internal Server Error' });
+            res.status(500).json({ error: 'Internal Server Error' });
         }
     }
 };
@@ -45,15 +42,13 @@ async function getAllBrands(req, res) {
         res.json(data)
     } catch(e) {
         console.log("getAllBrands ", await logError("getAllBrands", e))
-        res.status(500)
-        res.json({ error: 'Internal Server Error' });
+        res.status(500).json({ error: 'Internal Server Error' });
     }
 };
 
 async function checkParams(req, res) {
     if (Object.keys(req.query) == 0) {
-        res.statusCode = 400;
-        res.json({ error: "No value given!"})
+        res.status(400).json({ error: "No value given!"})
         return false
     } else {
         return true
