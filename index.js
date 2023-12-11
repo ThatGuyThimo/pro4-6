@@ -16,6 +16,10 @@ const options = {
 }
 
 app.use((req, res, next) => {
+  if(req.method === "OPTIONS") {
+    res.header('Access-Control-Allow-Methods', 'GET, PUT, POST, DELETE, OPTIONS');
+    res.statusCode(200)
+  }
   if(req.headers?.host === "thimodehaan.com" && req.headers?.accept === "application/json") {
     next()
   } else {
