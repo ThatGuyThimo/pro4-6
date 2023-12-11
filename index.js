@@ -6,7 +6,8 @@ import {router as carRoutes} from './routes/carsRoute.js';
 import {router as userRouter} from './routes/usersRoute.js'
 
 const app = express()
-const port = process.env.PORT
+const httpPort = process.env.HTTPPORT
+const httpPort = process.env.HTTPSPORT
 
 const options = {
   key: fs.readFileSync("./data/certs/thimodehaankey.pem"),
@@ -21,8 +22,10 @@ app.get('/', (req, res) => {
 app.use('/cars', carRoutes)
 app.use('/users', userRouter)
 
-app.listen(port, () => {
-  console.log(`Express listening on port ${port}`)
+app.listen(httpPort, () => {
+  console.log(`Http listening on port ${httpPort}`)
 })
 
-https.createServer(options, app).listen(8080);
+https.createServer(options, app, () => {
+  console.log(`Https listening on port ${httpsPort}`)
+}).listen(httpsPort);
