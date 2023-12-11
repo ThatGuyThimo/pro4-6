@@ -1,7 +1,7 @@
 import { Car, Brand } from './database.js'
 
 async function dbPostCar(params) {
-    const query = Car.save
+    const query = Car.insert()
 }
 
 async function dbGetCars(params) {
