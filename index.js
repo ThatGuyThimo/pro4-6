@@ -25,7 +25,7 @@ app.use((req, res, next) => {
 })
 
 app.get('/', (req, res) => {
-  res.json(JSON.parse(fs.readFileSync("./data/examplecars.json")))
+  res.json(JSON.parse(fs.readFileSync("./data/webservice.json")))
 })
 
 app.use('/cars', carRoutes)
