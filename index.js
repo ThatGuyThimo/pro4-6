@@ -26,6 +26,6 @@ app.listen(httpPort, () => {
   console.log(`Http listening on port ${httpPort}`)
 })
 
-https.createServer(options, app, () => {
+https.createServer(options, app).listen(httpsPort, () => {
   console.log(`Https listening on port ${httpsPort}`)
-}).listen(httpsPort);
+});
