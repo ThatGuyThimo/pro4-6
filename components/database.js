@@ -16,8 +16,14 @@ const brandSchema = new mongoose.Schema({
   name: { type: String, required: true, unique: true },
 });
 
+const userSchema = new mongoose.Schema({
+  username: { type: String, required: true },
+  password: { type: String, required: true },
+});
+
 const Car = mongoose.model('Car', carSchema);
 const Brand = mongoose.model('Brand', brandSchema);
+const User = mongoose.model('User', userSchema);
 
 dbConnect()
 
@@ -25,4 +31,4 @@ async function dbConnect() {
   await mongoose.connect(dbUri);
 }
 
-export {Car, Brand}
+export {Car, Brand, User}
