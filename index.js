@@ -15,6 +15,15 @@ const options = {
   passphrase: process.env.PHASSPHRASE
 }
 
+app.use((req, res, next) => {
+  if(req.headers?.host === "thimodehaan.com" && req.headers?.accept === "application/json") {
+    next()
+  } else {
+    res.statusCode = 400
+    res.send("Bad Headers!")
+  }
+})
+
 app.get('/', (req, res) => {
   res.send('Hello World!')
 })

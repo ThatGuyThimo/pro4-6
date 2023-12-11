@@ -2,15 +2,6 @@ import express from 'express';
 import { addCar, getAllCars, getAllBrands, getOneCar } from '../functions/cars.js';
 const router = express.Router()
 
-router.use((req, res, next) => {
-  if(req.headers?.host === "coolcars.nl" && req.headers?.accept === "application/json") {
-    next()
-  } else {
-    res.statusCode = 400
-    res.send("Bad Headers!")
-  }
-})
-
 router.get('/', (req, res) => {
   res.send('cars home page!')
 })
