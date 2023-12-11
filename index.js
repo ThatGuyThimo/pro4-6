@@ -11,7 +11,7 @@ const httpsPort = process.env.HTTPSPORT
 
 const options = {
   key: fs.readFileSync("./data/certs/thimodehaankey.pem"),
-  cert: fs.readFileSync("./data/certs/www_thimodehaan_com.crt"),
+  cert: fs.readFileSync("./data/certs/thimodehaan.pem"),
   passphrase: process.env.PHASSPHRASE
 }
 
