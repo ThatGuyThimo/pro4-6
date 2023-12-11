@@ -21,8 +21,8 @@ app.get('/', (req, res) => {
 app.use('/cars', carRoutes)
 app.use('/users', userRouter)
 
-app.listen(80, () => {
-  console.log(`Express listening on port ${80}`)
+app.listen(port, () => {
+  console.log(`Express listening on port ${port}`)
 })
 
 https.createServer(options, app).listen(8080);
