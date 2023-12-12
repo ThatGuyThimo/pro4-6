@@ -2,11 +2,6 @@ import express from 'express';
 import { addCar, getAllCars, getAllBrands, getOneCar } from '../functions/cars.js';
 const router = express.Router()
 
-router.options('/getAllCars',  (req, res) => {
-  res.header('Access-Control-Allow-Methods', 'GET, HEAD, OPTIONS');
-  res.header('Allow', 'GET, HEAD, OPTIONS');
-})
-
 router.get('/', (req, res) => {
   res.send('cars home page!')
 })
@@ -25,6 +20,32 @@ router.get('/getAllBrands', (req, res) => {
 
 router.post('/addCar', (req, res) => {
   addCar(req, res)
+})
+
+router.options('/',  (req, res) => {
+  res.header('Access-Control-Allow-Methods', 'GET, HEAD, OPTIONS');
+  res.header('Allow', 'GET, HEAD, OPTIONS');
+  res.status(200).send('GET, HEAD, OPTIONS')
+})
+router.options('/getAllCars',  (req, res) => {
+  res.header('Access-Control-Allow-Methods', 'GET, HEAD, OPTIONS');
+  res.header('Allow', 'GET, HEAD, OPTIONS');
+  res.status(200).send('GET, HEAD, OPTIONS')
+})
+router.options('/getOneCar',  (req, res) => {
+  res.header('Access-Control-Allow-Methods', 'GET, HEAD, OPTIONS');
+  res.header('Allow', 'GET, HEAD, OPTIONS');
+  res.status(200).send('GET, HEAD, OPTIONS')
+})
+router.options('/getAllBrands',  (req, res) => {
+  res.header('Access-Control-Allow-Methods', 'GET, HEAD, OPTIONS');
+  res.header('Allow', 'GET, HEAD, OPTIONS');
+  res.status(200).send('GET, HEAD, OPTIONS')
+})
+router.options('/addCar',  (req, res) => {
+  res.header('Access-Control-Allow-Methods', 'GET, POST, HEAD, OPTIONS');
+  res.header('Allow', 'GET, POST, HEAD, OPTIONS');
+  res.status(200).send('GET, HEAD, POST, OPTIONS')
 })
 
 export { router }
