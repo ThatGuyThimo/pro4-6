@@ -2,13 +2,15 @@ import express from 'express';
 import { addCar, getAllCars, getAllBrands, getOneCar } from '../functions/cars.js';
 const router = express.Router()
 
-router.get('/', (req, res) => {
-  res.send('cars home page!')
+router.options('/getAllCars',  (req, res) => {
+
 })
 
-// router.get('/about', (req, res) => {
-//   res.json(json)
-// })
+router.get('/', (req, res) => {
+  res.send('cars home page!')
+  res.header('Access-Control-Allow-Methods', 'GET, HEAD, OPTIONS');
+  res.header('Allow', 'GET, HEAD, OPTIONS');
+})
 
 router.get('/getAllCars', (req, res) => {
   getAllCars(req, res)
