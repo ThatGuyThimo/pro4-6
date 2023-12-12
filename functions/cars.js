@@ -18,8 +18,8 @@ async function getAllCars(req, res) {
     try {
         const data = await dbGetCars()
 
-        res.header('Access-Control-Allow-Methods', 'GET, PUT, POST, DELETE, HEAD, OPTIONS');
-        res.header('Allow', 'GET, PUT, POST, DELETE, HEAD, OPTIONS');
+        res.header('Access-Control-Allow-Methods', 'GET, HEAD, OPTIONS');
+        res.header('Allow', 'GET, HEAD, OPTIONS');
 
         res.json(data)
     } catch(e) {
