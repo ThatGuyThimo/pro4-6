@@ -5,8 +5,25 @@ import { logError } from "./errorLogging.js"
 async function addCar(req, res) {
     if(checkParams(req, res)){
         try {
-            const data = dbPostCar(req)
-            return data
+            const params = {}
+            params.brand = String(req.query.brand)
+            params.model = String(req.query.model)
+            params.year = parseInt(req.query.year)
+            params.color = String(req.query.color)
+            params.transmission = String(req.query.transmission)
+            params.engine = String(req.query.engine)
+            params.fueltype = String(req.query.fueltype)
+            params.price = parseFloat(req.query.price)
+
+            console.log(await validateObj(params))
+
+            if(await validateObj(params)) {
+                const data = await dbPostCar(params)
+                res.json(data)
+            } else {
+                res.status(400).json({error: 'Parameters must be filled'})
+            }
+
         } catch(e) {
             console.log("addCar ", await logError("addCar", e))
             res.status(500).json({ error: 'Internal Server Error' });
@@ -54,5 +71,21 @@ async function checkParams(req, res) {
         return true
     }
 };
+
+function validateObj(obj) {
+    return new Promise((resolve, reject) => {
+    let index = 0
+    console.log(obj)
+        Object.values(obj).forEach(value => {
+            index++
+            if(isNaN(value) || value == null || value == "" || value == undefined ||  value == 'undefined' || value == "NaN") {
+                resolve(false)
+            } else if (index === Object.values(obj).length) {
+                console.log("ran")
+                resolve(true)
+            }
+        });
+    })
+  }
 
 export {addCar, getAllCars, getAllBrands, getOneCar}
