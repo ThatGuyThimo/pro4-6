@@ -14,6 +14,9 @@ router.get('/getAllCars', (req, res) => {
 router.get('/getOneCar', (req, res) => {
   getOneCar(req, res)
 })
+router.get('/details', (req, res) => {
+  getOneCar(req, res)
+})
 
 router.get('/getAllBrands', (req, res) => {
   getAllBrands(req, res)
@@ -31,6 +34,12 @@ router.options('/',  (req, res) => {
   res.header('Allow', 'GET, POST, OPTIONS');
   res.status(200)
   res.send('GET, POST, OPTIONS')
+})
+router.options('/details',  (req, res) => {
+  res.header('Access-Control-Allow-Methods', 'GET, OPTIONS');
+  res.header('Allow', 'GET, OPTIONS');
+  res.status(200)
+  res.send('GET, OPTIONS')
 })
 router.options('/getAllCars',  (req, res) => {
   res.header('Access-Control-Allow-Methods', 'GET, HEAD, OPTIONS');
