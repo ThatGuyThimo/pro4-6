@@ -24,29 +24,35 @@ router.post('/addCar', (req, res) => {
 })
 
 router.options('/',  (req, res) => {
-  res.header('Access-Control-Allow-Methods', 'GET, OPTIONS');
+  console.log("ran")
+  res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
   res.header('Allow', 'GET, POST, OPTIONS');
   res.status(200)
+  res.send('GET, POST, OPTIONS')
 })
 router.options('/getAllCars',  (req, res) => {
   res.header('Access-Control-Allow-Methods', 'GET, HEAD, OPTIONS');
   res.header('Allow', 'GET, HEAD, OPTIONS');
   res.status(200)
+  res.send('GET, POST, OPTIONS')
 })
 router.options('/getOneCar',  (req, res) => {
   res.header('Access-Control-Allow-Methods', 'GET, HEAD, OPTIONS');
   res.header('Allow', 'GET, HEAD, OPTIONS');
   res.status(200)
+  res.send('GET, POST, OPTIONS')
 })
 router.options('/getAllBrands',  (req, res) => {
   res.header('Access-Control-Allow-Methods', 'GET, HEAD, OPTIONS');
   res.header('Allow', 'GET, HEAD, OPTIONS');
   res.status(200)
+  res.send('GET, POST, OPTIONS')
 })
 router.options('/addCar',  (req, res) => {
   res.header('Access-Control-Allow-Methods', 'POST, OPTIONS');
   res.header('Allow', 'POST, OPTIONS');
   res.status(200)
+  res.send('GET, POST, OPTIONS')
 })
 
 export { router }
