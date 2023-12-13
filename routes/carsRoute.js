@@ -24,8 +24,8 @@ router.post('/addCar', (req, res) => {
 })
 
 router.options('/',  (req, res) => {
-  res.header('Access-Control-Allow-Methods', 'GET, HEAD, OPTIONS');
-  res.header('Allow', 'GET, POST, HEAD, OPTIONS');
+  res.header('Access-Control-Allow-Methods', 'GET, OPTIONS');
+  res.header('Allow', 'GET, POST, OPTIONS');
   res.status(200)
 })
 router.options('/getAllCars',  (req, res) => {
@@ -44,8 +44,8 @@ router.options('/getAllBrands',  (req, res) => {
   res.status(200)
 })
 router.options('/addCar',  (req, res) => {
-  res.header('Access-Control-Allow-Methods', 'POST, HEAD, OPTIONS');
-  res.header('Allow', 'POST, HEAD, OPTIONS');
+  res.header('Access-Control-Allow-Methods', 'POST, OPTIONS');
+  res.header('Allow', 'POST, OPTIONS');
   res.status(200)
 })
 
