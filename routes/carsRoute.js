@@ -24,7 +24,6 @@ router.post('/addCar', (req, res) => {
 })
 
 router.options('/',  (req, res) => {
-  console.log("ran")
   res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
   res.header('Allow', 'GET, POST, OPTIONS');
   res.status(200)
