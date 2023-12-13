@@ -6,14 +6,14 @@ async function addCar(req, res) {
     if(checkParams(req, res)){
         try {
             const params = {}
-            params.brand = String(req.query.brand)
-            params.model = String(req.query.model)
-            params.year = parseInt(req.query.year)
-            params.color = String(req.query.color)
-            params.transmission = String(req.query.transmission)
-            params.engine = String(req.query.engine)
-            params.fueltype = String(req.query.fueltype)
-            params.price = parseFloat(req.query.price)
+            params.brand = String(req.query?.brand)
+            params.model = String(req.query?.model)
+            params.year = String(req.query?.year)
+            params.color = String(req.query?.color)
+            params.transmission = String(req.query?.transmission)
+            params.engine = String(req.query?.engine)
+            params.fuelType = String(req.query?.fuelType)
+            params.price = String(req.query?.price)
 
             console.log(await validateObj(params))
 
@@ -78,7 +78,7 @@ function validateObj(obj) {
     console.log(obj)
         Object.values(obj).forEach(value => {
             index++
-            if(isNaN(value) || value == null || value == "" || value == undefined ||  value == 'undefined' || value == "NaN") {
+            if(value == null || value == "" || value == undefined ||  value == 'undefined' || value == "NaN") {
                 resolve(false)
             } else if (index === Object.values(obj).length) {
                 console.log("ran")
