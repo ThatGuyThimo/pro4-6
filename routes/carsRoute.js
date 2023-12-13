@@ -22,6 +22,9 @@ router.get('/getAllBrands', (req, res) => {
 router.post('/addCar', (req, res) => {
   addCar(req, res)
 })
+router.post('/', (req, res) => {
+  addCar(req, res)
+})
 
 router.options('/',  (req, res) => {
   res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
