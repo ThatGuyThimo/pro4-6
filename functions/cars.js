@@ -16,7 +16,7 @@ async function addCar(req, res) {
 
         const response = dbPostCar(car)
 
-        res.json(response)
+        res.status(201).json(response)
     } catch(e) {
         console.log("addCar ", await logError("addCar", e))
         res.status(500).json({ error: 'Internal Server Error' });
