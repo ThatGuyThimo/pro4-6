@@ -1,9 +1,9 @@
 import { Car, Brand } from './database.js'
 
-async function dbPostCar(params) {
-    // const query = Car.save()
-    console.log(params)
-    return params
+async function dbPostCar(car) {
+    const query = car.save()
+    // console.log(params)
+    return query
 }
 
 async function dbGetCars(params) {

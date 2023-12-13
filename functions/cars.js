@@ -1,33 +1,25 @@
 import { dbPostCar, dbGetCars, dbGetBrands, dbGetOneCar } from "../components/dbFunctions.js";
+import { Car, Brand } from '../components/database.js'
 import { logError } from "./errorLogging.js"
 
 
 async function addCar(req, res) {
-    if(checkParams(req, res)){
-        try {
-            const params = {}
-            params.brand = String(req.query?.brand)
-            params.model = String(req.query?.model)
-            params.year = String(req.query?.year)
-            params.color = String(req.query?.color)
-            params.transmission = String(req.query?.transmission)
-            params.engine = String(req.query?.engine)
-            params.fuelType = String(req.query?.fuelType)
-            params.price = String(req.query?.price)
+    try {
+        const car = new Car(req.body)
 
-            console.log(await validateObj(params))
+        const validation = car.validateSync()
 
-            if(await validateObj(params)) {
-                const data = await dbPostCar(params)
-                res.json(data)
-            } else {
-                res.status(400).json({error: 'Parameters must be filled'})
-            }
-
-        } catch(e) {
-            console.log("addCar ", await logError("addCar", e))
-            res.status(500).json({ error: 'Internal Server Error' });
+        if(validation) {
+            res.status(400).json({error: 'Parameters must be filled', info: validation.errors})
+            return
         }
+
+        const response = dbPostCar(car)
+
+        res.json(response)
+    } catch(e) {
+        console.log("addCar ", await logError("addCar", e))
+        res.status(500).json({ error: 'Internal Server Error' });
     }
 }
 

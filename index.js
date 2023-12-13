@@ -1,6 +1,7 @@
 import express from 'express';
 import https from 'https';
 import fs from 'fs'
+import bodyParser from 'body-parser';
 import 'dotenv/config';
 import {router as carRoutes} from './routes/carsRoute.js';
 import {router as userRouter} from './routes/usersRoute.js'
@@ -14,6 +15,9 @@ const options = {
   cert: fs.readFileSync("./data/certs/thimodehaan.pem"),
   passphrase: process.env.PHASSPHRASE
 }
+
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: false }))
 
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
