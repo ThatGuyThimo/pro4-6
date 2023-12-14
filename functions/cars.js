@@ -105,7 +105,7 @@ function links(car) {
     ...car.toObject(),
     _links: {
       self: {
-        href: `https://thimodehaan.com:8080/cars/${car._id}`,
+        href: `https://thimodehaan.com:8080/cars/details/${car._id}`,
       },
       collection: {
         href: `https://thimodehaan.com:8080/cars`,
@@ -120,20 +120,20 @@ function pagination(obj) {
     currentItems: obj.length,
     totalPages: 1,
     totalItems: obj.length,
-    // _links: {
-    //     first: {
-    //       href: `https://thimodehaan.com:8080/cars/detail/`,
-    //     },
-    //     last: {
-    //       href: `https://thimodehaan.com:8080/cars/detail/`,
-    //     },
-    //     previous: {
-    //       href: `https://thimodehaan.com:8080/cars/detail/`,
-    //     },
-    //     next: {
-    //       href: `https://thimodehaan.com:8080/cars/detail/`,
-    //     },
-    //   },
+    _links: {
+        first: {
+          href: `https://thimodehaan.com:8080/cars/detail/`,
+        },
+        last: {
+          href: `https://thimodehaan.com:8080/cars/detail/`,
+        },
+        previous: {
+          href: `https://thimodehaan.com:8080/cars/detail/`,
+        },
+        next: {
+          href: `https://thimodehaan.com:8080/cars/detail/`,
+        },
+      },
   };
 }
 
