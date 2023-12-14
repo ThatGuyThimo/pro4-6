@@ -270,13 +270,6 @@ function getNextQueryString(total, start, limit) {
     return queryString;
 }
 
-function itemToPageNumber(start, limit, itemNumber) {
-    if (!limit || !start) {
-        return 1;
-    }
-    return Math.ceil(itemNumber / limit);
-}
-
 function createPagination(total, start, limit) {
     let pagination = {
         currentPage: currentPage(start, limit),
