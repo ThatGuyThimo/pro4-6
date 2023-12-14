@@ -76,7 +76,6 @@ async function getOneCar(req, res) {
         res.status(404).send("Not found!")
         return
       }
-      console.log(car)
       const data = links(car);
 
       res.json(data);
