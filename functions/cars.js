@@ -33,11 +33,8 @@ async function addCar(req, res) {
 
 async function editCar(req, res) {
   try {
-    console.log(req)
     req.body._id = req.params._id
-    // console.log(req.body)
     const car = new Car(req.body);
-    // console.log(car)
 
     const validation = car.validateSync();
 
