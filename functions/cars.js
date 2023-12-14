@@ -4,6 +4,7 @@ import {
   dbGetBrands,
   dbGetOneCar,
   dbDeleteCar,
+  dbPutCar
 } from "../components/dbFunctions.js";
 import { Car, Brand } from "../components/database.js";
 import { logError } from "./errorLogging.js";
@@ -26,6 +27,36 @@ async function addCar(req, res) {
     res.status(201).json(response);
   } catch (e) {
     console.log("addCar ", await logError("addCar", e));
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+}
+
+async function editCar(req, res) {
+  try {
+    req.body._id = req.params._id
+    // console.log(req.body)
+    const car = new Car(req.body);
+    // console.log(car)
+
+    const validation = car.validateSync();
+
+    if (validation) {
+      res
+        .status(400)
+        .json({ error: "Parameters must be filled", info: validation.errors });
+      return;
+    }
+
+    const delResponse = await dbDeleteCar(req.params);
+
+    if (delResponse.acknowledged && delResponse.deletedCount == 1) {
+        const saveResponse = dbPutCar(car);
+        res.status(201).json(saveResponse);
+    } else {
+        res.status(404).json({error: "entry not found"})
+    }
+  } catch (e) {
+    console.log("editCar ", await logError("editCar", e));
     res.status(500).json({ error: "Internal Server Error" });
   }
 }
@@ -142,4 +173,4 @@ function pagination(obj) {
   };
 }
 
-export { addCar, getAllCars, getAllBrands, getOneCar, deleteCar };
+export { addCar, getAllCars, getAllBrands, getOneCar, deleteCar, editCar };

@@ -1,5 +1,5 @@
 import express from 'express';
-import { addCar, getAllCars, getAllBrands, getOneCar, deleteCar } from '../functions/cars.js';
+import { addCar, getAllCars, getAllBrands, getOneCar, deleteCar, editCar } from '../functions/cars.js';
 const router = express.Router()
 
 router.get('/', (req, res) => {
@@ -19,6 +19,9 @@ router.get('/:_id', (req, res) => {
 })
 router.get('/details/:_id', (req, res) => {
   getOneCar(req, res)
+})
+router.put('/details/:_id', (req, res) => {
+  editCar(req, res)
 })
 router.delete('/details/:_id', (req, res) => {
   deleteCar(req, res)
@@ -49,10 +52,10 @@ router.options('/',  (req, res) => {
   res.send('GET, POST, OPTIONS')
 })
 router.options('/details',  (req, res) => {
-  res.header('Access-Control-Allow-Methods', 'GET, DELETE, OPTIONS');
-  res.header('Allow', 'GET, DELETE, OPTIONS');
+  res.header('Access-Control-Allow-Methods', 'GET, DELETE, PUT, OPTIONS');
+  res.header('Allow', 'GET, DELETE, PUT, OPTIONS');
   res.status(200)
-  res.send('GET, DELETE, OPTIONS')
+  res.send('GET, DELETE, PUT, OPTIONS')
 })
 router.options('/getAllCars',  (req, res) => {
   res.header('Access-Control-Allow-Methods', 'GET, OPTIONS');

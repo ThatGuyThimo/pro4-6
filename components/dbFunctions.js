@@ -1,14 +1,17 @@
 import { Car, Brand } from './database.js'
 
-async function dbPostCar(car) {
-    const query = car.save()
-    // console.log(params)
+async function dbPostCar(params) {
+    const query = params.save()
     return query
 }
 
-async function dbDeleteCar(car) {
-    const query = Car.deleteOne(car)
-    // console.log(params)
+async function dbPutCar(params) {
+    const query = params.save()
+    return query
+}
+
+async function dbDeleteCar(params) {
+    const query = Car.deleteOne(params)
     return query
 }
 
@@ -27,4 +30,4 @@ async function dbGetBrands(params) {
     return query
 }
 
-export {dbPostCar, dbGetCars, dbGetBrands, dbGetOneCar, dbDeleteCar}
+export {dbPostCar, dbGetCars, dbGetBrands, dbGetOneCar, dbDeleteCar, dbPutCar}
