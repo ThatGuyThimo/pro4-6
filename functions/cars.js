@@ -81,7 +81,6 @@ async function getAllCars(req, res) {
     const total = await Car.countDocuments()
     const page = currentPage(start, limit)
     const cars = await dbGetCars(start, limit, page);
-    console.log(cars)
 
     let carArray = [];
 
@@ -158,11 +157,12 @@ function links(car) {
 function pagination(total, start, limit) {
     console.log({total, start, limit})
     const actual = createPagination(total, start, limit)
+    console.log(actual)
   return {
     currentPage: actual.currentPage,
     currentItems: actual.currentItems,
-    totalPages: actual.totalPages,
-    totalItems: actual.totalItems,
+    totalPages: actual.numberOfPages,
+    totalItems: total,
     _links: {
         first: {
           href: `https://thimodehaan.com:8080/cars/${actual.firstPageQueryString}`,
