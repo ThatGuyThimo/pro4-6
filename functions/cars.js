@@ -82,10 +82,12 @@ async function getAllCars(req, res) {
     const page = currentPage(start, limit)
     const cars = await dbGetCars(start, limit, page);
 
+    console.log(cars)
+
     let carArray = [];
 
     cars.forEach((car) => {
-      carArray.push(links(car));
+      carArray.push(links(car, false));
     });
 
     const linkToSelf = {self: {
@@ -111,8 +113,9 @@ async function getOneCar(req, res) {
         res.status(404).send("Not found!")
         return
       }
-      const data = links(car);
+      const data = links(car, true);
 
+      console.log(data)
       res.json(data);
     } catch (e) {
       console.log("getOneCar ", await logError("getOneCar", e));
@@ -140,7 +143,10 @@ async function checkParams(req, res) {
   }
 }
 
-function links(car) {
+function links(car, on) {
+    if(on) {
+        car = car.toObject()
+    } 
   return {
     ...car,
     _links: {
