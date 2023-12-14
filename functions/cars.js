@@ -82,7 +82,6 @@ async function getAllCars(req, res) {
     const page = currentPage(start, limit)
     const cars = await dbGetCars(start, limit, page);
 
-    console.log(cars)
 
     let carArray = [];
 
@@ -98,7 +97,6 @@ async function getAllCars(req, res) {
 
     res.json(data);
   } catch (e) {
-    console.log(e)
     console.log("getAllCars ", await logError("getAllCars", e));
     res.status(500).json({ error: "Internal Server Error" });
   }
@@ -115,7 +113,6 @@ async function getOneCar(req, res) {
       }
       const data = links(car, true);
 
-      console.log(data)
       res.json(data);
     } catch (e) {
       console.log("getOneCar ", await logError("getOneCar", e));
@@ -161,9 +158,7 @@ function links(car, on) {
 }
 
 function pagination(total, start, limit) {
-    console.log({total, start, limit})
     const actual = createPagination(total, start, limit)
-    console.log(actual)
   return {
     currentPage: actual.currentPage,
     currentItems: actual.currentItems,
