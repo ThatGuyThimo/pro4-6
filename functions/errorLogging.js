@@ -29,17 +29,20 @@ async function logError(name, value) {
         let date = new Date
         let fileName = `${name} ${date.getDay()}-${date.getMonth()}-${date.getFullYear()}-h${date.getHours()}-m${date.getMinutes()}-s${date.getSeconds()}`
         if (await _createloggingFolder()) {
-            fs.open(`${dir}errorLogs/${fileName}.txt`, 'w', function (error) {
+            let fdNumber
+            fs.open(`${dir}errorLogs/${fileName}.txt`, 'w', function (error, fd) {
                 if (error) {
                     console.log(error)
                     reject(false)
                 }
+                fdNumber = fd
             })
             fs.writeFile(`${dir}errorLogs/${fileName}.txt`, `${value}`, function (error) {
                 if (error) {
                     console.log(error)
                     reject(false)
                 }
+                fs.close(fdNumber)
                 resolve(fileName)
             })
         }

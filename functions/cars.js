@@ -36,7 +36,13 @@ async function getAllCars(req, res) {
 async function getOneCar(req, res) {
     if(await checkParams(req, res)) {
         try {
-            const data = await dbGetOneCar(req.query)
+            let data = {}
+            data.car = await dbGetOneCar(req.query)
+            const link = links(data.car)
+            data = {
+                ...data,
+                ...link
+            }
             res.json(data)
         } catch(e) {
             console.log("getOneCar ", await logError("getOneCar", e))
@@ -78,6 +84,19 @@ function validateObj(obj) {
             }
         });
     })
+  }
+
+  function links(car) {
+    return {
+        _links: {
+          self: {
+            href: `https://thimodehaan.com:8080/cars/detail/?_id=${car._id}`,
+          },
+          collection: {
+            href: `https://thimodehaan.com:8080/cars`,
+          },
+        },
+      };
   }
 
 export {addCar, getAllCars, getAllBrands, getOneCar}
