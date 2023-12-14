@@ -54,8 +54,9 @@ router.options('/',  (req, res) => {
 router.options('/details',  (req, res) => {
   res.header('Access-Control-Allow-Methods', 'GET, PUT, DELETE, OPTIONS');
   res.header('Allow', 'GET, PUT, DELETE, OPTIONS');
+  res.header("Content-Type", "application/json");
   res.status(200)
-  // res.send('GET, PUT, DELETE, OPTIONS')
+  res.send()
 })
 router.options('/getAllCars',  (req, res) => {
   res.header('Access-Control-Allow-Methods', 'GET, OPTIONS');
