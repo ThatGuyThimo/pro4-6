@@ -36,7 +36,7 @@ async function deleteCar(req, res) {
 
             const result = await dbDeleteCar(req.params)
     
-            res.send(result)
+            res.status(204).send(result)
         } catch(e) {
             console.log("deleteCar ", await logError("deleteCar", e));
             res.status(500).json({ error: "Internal Server Error" });
