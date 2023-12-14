@@ -76,8 +76,8 @@ async function deleteCar(req, res) {
 async function getAllCars(req, res) {
   try {
 
-    const start = isNaN(parseInt(req.query.start)) ? undefined : parseInt(req.query.start);
-    const limit = isNaN(parseInt(req.query.limit)) ? undefined : parseInt(req.query.limit);
+    let start = isNaN(parseInt(req.query.start)) ? undefined : parseInt(req.query.start);
+    let limit = isNaN(parseInt(req.query.limit)) ? undefined : parseInt(req.query.limit);
     const cars = await dbGetCars(start, limit);
 
     let carArray = [];
