@@ -40,12 +40,12 @@ async function editCar(req, res) {
 
     const validation = car.validateSync();
 
-    if (validation) {
-      res
-        .status(400)
-        .json({ error: "Parameters must be filled", info: validation.errors });
-      return;
-    }
+    // if (validation) {
+    //   res
+    //     .status(400)
+    //     .json({ error: "Parameters must be filled", info: validation.errors });
+    //   return;
+    // }
 
     const delResponse = await dbDeleteCar(req.params);
 
