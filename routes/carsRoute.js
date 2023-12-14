@@ -17,6 +17,9 @@ router.get('/getOneCar', (req, res) => {
 router.get('/:_id', (req, res) => {
   getOneCar(req, res)
 })
+router.get('/details/:_id', (req, res) => {
+  getOneCar(req, res)
+})
 
 router.get('/getAllBrands', (req, res) => {
   getAllBrands(req, res)
