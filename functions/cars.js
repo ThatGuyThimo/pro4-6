@@ -58,7 +58,7 @@ async function getAllCars(req, res) {
         href: 'https://thimodehaan.com:8080/cars'
     }}
 
-    const data = { items: carArray,_link: linkToSelf, pagination: pagination(carArray) };
+    const data = { items: carArray, _links: linkToSelf, pagination: pagination(carArray) };
 
     res.json(data);
   } catch (e) {
