@@ -2,12 +2,12 @@ import express from 'express';
 import { addCar, getAllCars, getAllBrands, getOneCar, deleteCar, editCar } from '../functions/cars.js';
 const router = express.Router()
 
-router.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  res.header("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE");
-  next();
-});
+// router.use((req, res, next) => {
+//   res.header("Access-Control-Allow-Origin", "*");
+//   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+//   res.header("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE");
+//   next();
+// });
 router.get('/getAllCars', (req, res) => {
   getAllCars(req, res)
 })
