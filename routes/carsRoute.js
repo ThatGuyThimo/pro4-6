@@ -49,10 +49,10 @@ router.options('/',  (req, res) => {
   res.send('GET, POST, OPTIONS')
 })
 router.options('/details',  (req, res) => {
-  res.header('Access-Control-Allow-Methods', 'GET, OPTIONS');
-  res.header('Allow', 'GET, OPTIONS');
+  res.header('Access-Control-Allow-Methods', 'GET, DELETE, OPTIONS');
+  res.header('Allow', 'GET, DELETE, OPTIONS');
   res.status(200)
-  res.send('GET, OPTIONS')
+  res.send('GET, DELETE, OPTIONS')
 })
 router.options('/getAllCars',  (req, res) => {
   res.header('Access-Control-Allow-Methods', 'GET, OPTIONS');
@@ -70,19 +70,19 @@ router.options('/deleteCar',  (req, res) => {
   res.header('Access-Control-Allow-Methods', 'DELETE, OPTIONS');
   res.header('Allow', 'DELETE, OPTIONS');
   res.status(200)
-  res.send('GET, POST, OPTIONS')
+  res.send('DELETE, OPTIONS')
 })
 router.options('/getAllBrands',  (req, res) => {
-  res.header('Access-Control-Allow-Methods', 'GET, HEAD, OPTIONS');
-  res.header('Allow', 'GET, HEAD, OPTIONS');
+  res.header('Access-Control-Allow-Methods', 'GET, OPTIONS');
+  res.header('Allow', 'GET, OPTIONS');
   res.status(200)
-  res.send('GET, POST, OPTIONS')
+  res.send('GET, OPTIONS')
 })
 router.options('/addCar',  (req, res) => {
   res.header('Access-Control-Allow-Methods', 'POST, OPTIONS');
   res.header('Allow', 'POST, OPTIONS');
   res.status(200)
-  res.send('GET, POST, OPTIONS')
+  res.send('POST, OPTIONS')
 })
 
 export { router }

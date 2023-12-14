@@ -71,6 +71,12 @@ async function getOneCar(req, res) {
   if (await checkParams(req, res)) {
     try {
       let car = await dbGetOneCar(req.params);
+
+      if(car === null) {
+        res.status(404).send("Not found!")
+        return
+      }
+      console.log(car)
       const data = links(car);
 
       res.json(data);
