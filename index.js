@@ -23,11 +23,11 @@ app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Headers', 'Origin, Conten-Type, Accept');
   if( req.headers?.accept === "application/json") {
-    if(req.method === "OPTIONS") {
-      res.header('Access-Control-Allow-Methods', 'GET, PUT, POST, DELETE, OPTIONS');
-      res.header('Allow', 'GET, PUT, POST, DELETE, OPTIONS');
-      res.status(200).send('GET, PUT, POST, DELETE, OPTIONS')
-    }
+    // if(req.method === "OPTIONS") {
+    //   res.header('Access-Control-Allow-Methods', 'GET, PUT, POST, DELETE, HEAD, OPTIONS');
+    //   res.header('Allow', 'GET, PUT, POST, DELETE, HEAD, OPTIONS');
+    //   res.status(200).send('GET, PUT, POST, DELETE, HEAD, OPTIONS')
+    // }
     next()
   } else {
     res.status(400).send("Bad Headers!")
