@@ -4,12 +4,12 @@ const dbUri = process.env.DBURI
 const carSchema = new mongoose.Schema({
   brand: { type: String, required: true },
   model: { type: String, required: true },
-  year: { type: Number, required: true },
+  year: { type: String, required: true },
   color: { type: String, required: true },
   transmission: { type: String, required: true },
   engine: { type: String, required: true },
   fuelType: { type: String, required: true },
-  price: { type: Number, required: true },
+  price: { type: String, required: true },
 });
 
 const brandSchema = new mongoose.Schema({
