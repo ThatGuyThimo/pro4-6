@@ -27,7 +27,6 @@ async function dbGetCars(start, limit, page) {
 
 async function dbGetOneCar(params) {
     const query = Car.findOne(params)
-    console.log(query)
     return query
 }
 
