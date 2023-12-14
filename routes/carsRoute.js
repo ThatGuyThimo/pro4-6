@@ -29,11 +29,10 @@ router.post('/', (req, res) => {
   addCar(req, res)
 })
 
-router.delete('/deleteCar', (req, res) => {
-  console.log('ran')
+router.delete('/deleteCar/:_id', (req, res) => {
   deleteCar(req, res)
 })
-router.delete('/', (req, res) => {
+router.delete('/:_id', (req, res) => {
   deleteCar(req, res)
 })
 

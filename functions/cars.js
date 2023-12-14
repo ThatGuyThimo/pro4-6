@@ -31,19 +31,16 @@ async function addCar(req, res) {
 }
 
 async function deleteCar(req, res) {
-    try {
-        if (!req.query?._id) {
-            console.log(req.query)
-            req.query = {_id: req.query}
-        }
-        console.log(req.query)
-        // const result = await dbDeleteCar(req.query)
+    if (await checkParams(req, res)) {
+        try {
 
-        // res.send(result)
-        res.send('ok')
-    } catch(e) {
-        console.log("deleteCar ", await logError("deleteCar", e));
-        res.status(500).json({ error: "Internal Server Error" });
+            const result = await dbDeleteCar(req.params)
+    
+            res.send(result)
+        } catch(e) {
+            console.log("deleteCar ", await logError("deleteCar", e));
+            res.status(500).json({ error: "Internal Server Error" });
+        }
     }
 } 
 
@@ -101,27 +98,6 @@ async function checkParams(req, res) {
   } else {
     return true;
   }
-}
-
-function validateObj(obj) {
-  return new Promise((resolve, reject) => {
-    let index = 0;
-    Object.values(obj).forEach((value) => {
-      index++;
-      if (
-        value == null ||
-        value == "" ||
-        value == undefined ||
-        value == "undefined" ||
-        value == "NaN"
-      ) {
-        resolve(false);
-      } else if (index === Object.values(obj).length) {
-        console.log("ran");
-        resolve(true);
-      }
-    });
-  });
 }
 
 function links(car) {
