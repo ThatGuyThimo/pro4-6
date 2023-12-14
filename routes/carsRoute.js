@@ -52,9 +52,16 @@ router.options('/',  (req, res) => {
   res.send('GET, POST, OPTIONS')
 })
 router.options('/details',  (req, res) => {
-  // res.header('Access-Control-Allow-Methods', 'GET,PUT,DELETE,OPTIONS');
-  // res.header('Allow', 'GET,PUT,DELETE,OPTIONS');
-  // res.header("Content-Type", "application/json");
+  res.header('Access-Control-Allow-Methods', 'GET,PUT,DELETE,OPTIONS');
+  res.header('Allow', 'GET,PUT,DELETE,OPTIONS');
+  res.header("Content-Type", "application/json");
+  res.status(200)
+  res.send()
+})
+router.options('/details/_id',  (req, res) => {
+  res.header('Access-Control-Allow-Methods', 'GET,PUT,DELETE,OPTIONS');
+  res.header('Allow', 'GET,PUT,DELETE,OPTIONS');
+  res.header("Content-Type", "application/json");
   res.status(200)
   res.send()
 })
