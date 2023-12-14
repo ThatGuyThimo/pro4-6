@@ -27,14 +27,20 @@ async function getAllCars(req, res) {
     try {
         const cars = await dbGetCars()
 
-        const data = []
+        let carArray = []
 
         cars.forEach(car => {
-            data.push(links(car))
+            carArray.push(links(car))
         });
 
-        console.log(data)
+        // carArray.push({_links:{self: {
+        //     href: 'https://thimodehaan.com:8080/cars'
+        // }}})
 
+        
+        // console.log(pagination(carArray))
+        const data = {items: pagination(carArray)}
+        
         res.json(data)
     } catch(e) {
         console.log("getAllCars ", await logError("getAllCars", e))
@@ -78,7 +84,6 @@ async function checkParams(req, res) {
 function validateObj(obj) {
     return new Promise((resolve, reject) => {
     let index = 0
-    console.log(obj)
         Object.values(obj).forEach(value => {
             index++
             if(value == null || value == "" || value == undefined ||  value == 'undefined' || value == "NaN") {
@@ -102,6 +107,32 @@ function validateObj(obj) {
             href: `https://thimodehaan.com:8080/cars`,
           },
         },
+      };
+  }
+
+  function pagination(obj) {
+    return {
+        ...obj,
+        pagination: {
+            currentPage: 1,
+            currentItems: obj.length,
+            totalPages: 1,
+            totalItems: 20,
+            _links: {
+                first: {
+                    href: `https://thimodehaan.com:8080/cars/detail/`
+                },
+                last: {
+                    href: `https://thimodehaan.com:8080/cars/detail/`
+                },
+                previous: {
+                    href: `https://thimodehaan.com:8080/cars/detail/`
+                },
+                next: {
+                    href: `https://thimodehaan.com:8080/cars/detail/`
+                }
+            }
+        }
       };
   }
 
