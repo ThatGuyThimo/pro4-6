@@ -2,6 +2,13 @@ import express from 'express';
 import { addCar, getAllCars, getAllBrands, getOneCar, deleteCar, editCar } from '../functions/cars.js';
 const router = express.Router()
 
+router.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  res.header("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE");
+  next();
+});
+
 router.get('/getAllCars', (req, res) => {
   getAllCars(req, res)
 })
@@ -47,11 +54,30 @@ router.options('/',  (req, res) => {
   res.send('GET, POST, OPTIONS')
 })
 router.options('/details',  (req, res) => {
-  res.header('Access-Control-Allow-Methods', 'GET,PUT,DELETE,OPTIONS');
-  res.header('Allow', 'GET,PUT,DELETE,OPTIONS');
-  res.header("Content-Type", "application/json");
-  res.status(200)
-  res.send()
+  // res.header('Access-Control-Allow-Methods', 'GET,PUT,DELETE,OPTIONS');
+  // res.header('Allow', 'GET,PUT,DELETE,OPTIONS');
+  // res.header("Content-Type", "application/json");
+  // res.status(200)
+  // res.send()
+  const allowedMethods = "GET, PUT, DELETE, OPTIONS";
+  res.header("Allow", allowedMethods);
+  res.header("Access-Control-Allow-Methods", allowedMethods);
+  res.header("Access-Control-Allow-Origin", "*"); // Adjust as needed
+  res.setHeader("Content-Type", "application/json");
+  res.status(200).send();
+})
+router.options('/details/:_id',  (req, res) => {
+  // res.header('Access-Control-Allow-Methods', 'GET,PUT,DELETE,OPTIONS');
+  // res.header('Allow', 'GET,PUT,DELETE,OPTIONS');
+  // res.header("Content-Type", "application/json");
+  // res.status(200)
+  // res.send()
+  const allowedMethods = "GET, PUT, DELETE, OPTIONS";
+  res.header("Allow", allowedMethods);
+  res.header("Access-Control-Allow-Methods", allowedMethods);
+  res.header("Access-Control-Allow-Origin", "*"); // Adjust as needed
+  res.setHeader("Content-Type", "application/json");
+  res.status(200).send();
 })
 
 router.options('/getAllCars',  (req, res) => {
