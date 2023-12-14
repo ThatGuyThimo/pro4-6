@@ -78,7 +78,10 @@ async function getAllCars(req, res) {
 
     let start = isNaN(parseInt(req.query.start)) ? undefined : parseInt(req.query.start);
     let limit = isNaN(parseInt(req.query.limit)) ? undefined : parseInt(req.query.limit);
-    const cars = await dbGetCars(start, limit);
+    const total = await Car.countDocuments()
+    const page = currentPage(start, limit)
+    const cars = await dbGetCars(start, limit, page);
+    console.log(cars)
 
     let carArray = [];
 
@@ -90,10 +93,11 @@ async function getAllCars(req, res) {
         href: 'https://thimodehaan.com:8080/cars'
     }}
 
-    const data = { items: carArray, _links: linkToSelf, pagination: pagination(carArray) };
+    const data = { items: carArray, _links: linkToSelf, pagination: pagination(total, start, limit) };
 
     res.json(data);
   } catch (e) {
+    console.log(e)
     console.log("getAllCars ", await logError("getAllCars", e));
     res.status(500).json({ error: "Internal Server Error" });
   }
@@ -139,7 +143,7 @@ async function checkParams(req, res) {
 
 function links(car) {
   return {
-    ...car.toObject(),
+    ...car,
     _links: {
       self: {
         href: `https://thimodehaan.com:8080/cars/details/${car._id}`,
@@ -151,8 +155,9 @@ function links(car) {
   };
 }
 
-function pagination(obj) {
-    const actual = createPagination()
+function pagination(total, start, limit) {
+    console.log({total, start, limit})
+    const actual = createPagination(total, start, limit)
   return {
     currentPage: actual.currentPage,
     currentItems: actual.currentItems,

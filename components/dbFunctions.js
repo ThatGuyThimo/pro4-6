@@ -15,10 +15,10 @@ async function dbDeleteCar(params) {
     return query
 }
 
-async function dbGetCars(start, limit) {
+async function dbGetCars(start, limit, page) {
     
     const query = Car.find()
-    .skip((currentPage(start, limit) - 1) * limit)
+    .skip((page - 1) * limit)
     .limit(limit)
     .lean();
 
