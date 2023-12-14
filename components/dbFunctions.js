@@ -6,6 +6,12 @@ async function dbPostCar(car) {
     return query
 }
 
+async function dbDeleteCar(car) {
+    const query = Car.deleteOne(car)
+    // console.log(params)
+    return query
+}
+
 async function dbGetCars(params) {
     const query = Car.find(params)
     return query
@@ -21,4 +27,4 @@ async function dbGetBrands(params) {
     return query
 }
 
-export {dbPostCar, dbGetCars, dbGetBrands, dbGetOneCar}
+export {dbPostCar, dbGetCars, dbGetBrands, dbGetOneCar, dbDeleteCar}

@@ -1,5 +1,5 @@
 import express from 'express';
-import { addCar, getAllCars, getAllBrands, getOneCar } from '../functions/cars.js';
+import { addCar, getAllCars, getAllBrands, getOneCar, deleteCar } from '../functions/cars.js';
 const router = express.Router()
 
 router.get('/', (req, res) => {
@@ -14,7 +14,7 @@ router.get('/getAllCars', (req, res) => {
 router.get('/getOneCar', (req, res) => {
   getOneCar(req, res)
 })
-router.get('/details', (req, res) => {
+router.get('/:_id', (req, res) => {
   getOneCar(req, res)
 })
 
@@ -27,6 +27,14 @@ router.post('/addCar', (req, res) => {
 })
 router.post('/', (req, res) => {
   addCar(req, res)
+})
+
+router.delete('/deleteCar', (req, res) => {
+  console.log('ran')
+  deleteCar(req, res)
+})
+router.delete('/', (req, res) => {
+  deleteCar(req, res)
 })
 
 router.options('/',  (req, res) => {
@@ -42,14 +50,20 @@ router.options('/details',  (req, res) => {
   res.send('GET, OPTIONS')
 })
 router.options('/getAllCars',  (req, res) => {
-  res.header('Access-Control-Allow-Methods', 'GET, HEAD, OPTIONS');
-  res.header('Allow', 'GET, HEAD, OPTIONS');
+  res.header('Access-Control-Allow-Methods', 'GET, OPTIONS');
+  res.header('Allow', 'GET, OPTIONS');
   res.status(200)
-  res.send('GET, POST, OPTIONS')
+  res.send('GET, OPTIONS')
 })
 router.options('/getOneCar',  (req, res) => {
-  res.header('Access-Control-Allow-Methods', 'GET, HEAD, OPTIONS');
-  res.header('Allow', 'GET, HEAD, OPTIONS');
+  res.header('Access-Control-Allow-Methods', 'GET, OPTIONS');
+  res.header('Allow', 'GET, OPTIONS');
+  res.status(200)
+  res.send('GET, OPTIONS')
+})
+router.options('/deleteCar',  (req, res) => {
+  res.header('Access-Control-Allow-Methods', 'DELETE, OPTIONS');
+  res.header('Allow', 'DELETE, OPTIONS');
   res.status(200)
   res.send('GET, POST, OPTIONS')
 })

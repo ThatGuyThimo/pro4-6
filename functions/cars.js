@@ -3,6 +3,7 @@ import {
   dbGetCars,
   dbGetBrands,
   dbGetOneCar,
+  dbDeleteCar,
 } from "../components/dbFunctions.js";
 import { Car, Brand } from "../components/database.js";
 import { logError } from "./errorLogging.js";
@@ -29,6 +30,23 @@ async function addCar(req, res) {
   }
 }
 
+async function deleteCar(req, res) {
+    try {
+        if (!req.query?._id) {
+            console.log(req.query)
+            req.query = {_id: req.query}
+        }
+        console.log(req.query)
+        // const result = await dbDeleteCar(req.query)
+
+        // res.send(result)
+        res.send('ok')
+    } catch(e) {
+        console.log("deleteCar ", await logError("deleteCar", e));
+        res.status(500).json({ error: "Internal Server Error" });
+    }
+} 
+
 async function getAllCars(req, res) {
   try {
     const cars = await dbGetCars();
@@ -43,9 +61,7 @@ async function getAllCars(req, res) {
         href: 'https://thimodehaan.com:8080/cars'
     }}
 
-    // console.log(pagination(carArray))
     const data = { items: carArray,_link: linkToSelf, pagination: pagination(carArray) };
-    console.log(data);
 
     res.json(data);
   } catch (e) {
@@ -57,7 +73,7 @@ async function getAllCars(req, res) {
 async function getOneCar(req, res) {
   if (await checkParams(req, res)) {
     try {
-      let car = await dbGetOneCar(req.query);
+      let car = await dbGetOneCar(req.params);
       const data = links(car);
 
       res.json(data);
@@ -79,7 +95,7 @@ async function getAllBrands(req, res) {
 }
 
 async function checkParams(req, res) {
-  if (Object.keys(req.query) == 0) {
+  if (Object.keys(req.query) == 0 && Object.keys(req.params) == 0) {
     res.status(400).json({ error: "No value given!" });
     return false;
   } else {
@@ -113,7 +129,7 @@ function links(car) {
     ...car.toObject(),
     _links: {
       self: {
-        href: `https://thimodehaan.com:8080/cars/detail/?_id=${car._id}`,
+        href: `https://thimodehaan.com:8080/cars/${car._id}`,
       },
       collection: {
         href: `https://thimodehaan.com:8080/cars`,
@@ -127,22 +143,22 @@ function pagination(obj) {
     currentPage: 1,
     currentItems: obj.length,
     totalPages: 1,
-    totalItems: 20,
-    _links: {
-      first: {
-        href: `https://thimodehaan.com:8080/cars/detail/`,
-      },
-      last: {
-        href: `https://thimodehaan.com:8080/cars/detail/`,
-      },
-      previous: {
-        href: `https://thimodehaan.com:8080/cars/detail/`,
-      },
-      next: {
-        href: `https://thimodehaan.com:8080/cars/detail/`,
-      },
-    },
+    totalItems: obj.length,
+    // _links: {
+    //     first: {
+    //       href: `https://thimodehaan.com:8080/cars/detail/`,
+    //     },
+    //     last: {
+    //       href: `https://thimodehaan.com:8080/cars/detail/`,
+    //     },
+    //     previous: {
+    //       href: `https://thimodehaan.com:8080/cars/detail/`,
+    //     },
+    //     next: {
+    //       href: `https://thimodehaan.com:8080/cars/detail/`,
+    //     },
+    //   },
   };
 }
 
-export { addCar, getAllCars, getAllBrands, getOneCar };
+export { addCar, getAllCars, getAllBrands, getOneCar, deleteCar };
